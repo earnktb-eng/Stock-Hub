@@ -81,29 +81,42 @@
     <option value="bottle">ขวด</option>
 </select>
 
-<button onclick="convertUnit()">แปลงหน่วย</button>
+<button onclick="convertUnit()">บันทึกลงชีท</button>
 
 <p id="result"></p>
 
 <script>
-function convertUnit() {
+const API_URL = "วางลิงก์ Apps Script ตรงนี้";
+
+function convert(amount, unit){
+    if(unit === "gram"){
+        return {value: amount/1000, unit:"kg"};
+    }
+    if(unit === "crate"){
+        return {value: amount*24, unit:"bottle"};
+    }
+    return {value: amount, unit:unit};
+}
+
+function sendData(){
     let amount = parseFloat(document.getElementById("amount").value);
     let unit = document.getElementById("unit").value;
-    let resultText = "";
 
-    if (unit === "gram") {
-        let kg = amount / 1000;
-        resultText = amount + " กรัม = " + kg + " กิโลกรัม";
-    } 
-    else if (unit === "crate") {
-        let bottles = amount * 24;
-        resultText = amount + " ลัง = " + bottles + " ขวด";
-    } 
-    else {
-        resultText = "ไม่ต้องแปลงหน่วย";
-    }
+    let converted = convert(amount, unit);
 
-    document.getElementById("result").innerText = resultText;
+    fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify({
+            product: "สินค้า",
+            amount: converted.value,
+            unit: converted.unit,
+            type: "in"
+        })
+    })
+    .then(res => res.text())
+    .then(() => {
+        document.getElementById("result").innerText = "บันทึกลงชีทแล้ว!";
+    });
 }
 </script>
 
