@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<title>ศูนย์กสิกรรมมาบเอื้อง</title>
+<style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { color: green; }
+    .category { margin-top: 20px; }
+</style>
+</head>
+<body>
+
+<h1>ศูนย์กสิกรรมมาบเอื้อง</h1>
+
+<div class="category">
+    <h2>1. สมุนไพรแห้ง</h2>
+    <ul>
+        <li>ขิงแห้ง (กรัม / กิโลกรัม)</li>
+        <li>ตระไคร้อบแห้ง (กรัม / กิโลกรัม)</li>
+        <li>ดอกเก๊กฮวยแห้ง (กรัม / กิโลกรัม)</li>
+        <li>กระเจี๊ยบแห้ง (กรัม / กิโลกรัม)</li>
+    </ul>
+</div>
+
+<div class="category">
+    <h2>2. สมุนไพรสด</h2>
+    <ul>
+        <li>ตระไคร้ (กรัม / กิโลกรัม)</li>
+        <li>ขิง (กรัม / กิโลกรัม)</li>
+        <li>ข่า (กรัม / กิโลกรัม)</li>
+        <li>ใบมะกรูด (กรัม / กิโลกรัม)</li>
+        <li>ใบเตย (กรัม / กิโลกรัม)</li>
+    </ul>
+</div>
+
+<div class="category">
+    <h2>3. เครื่องดื่มสมุนไพร</h2>
+    <ul>
+        <li>น้ำตระไคร้ (ขวด / ลัง)</li>
+        <li>น้ำขิง (ขวด / ลัง)</li>
+        <li>น้ำใบเตย (ขวด / ลัง)</li>
+        <li>น้ำเก๊กฮวย (ขวด / ลัง)</li>
+        <li>น้ำกระเจี๊ยบ (ขวด / ลัง)</li>
+    </ul>
+</div>
+
+<div class="category">
+    <h2>4. ผลิตภัณฑ์ดูแลสุขภาพ</h2>
+    <ul>
+        <li>ยาหม่องสมุนไพร (กระปุก)</li>
+        <li>ลูกประคบ (ลูก)</li>
+        <li>น้ำมันนวดสมุนไพร (ขวด)</li>
+        <li>สบู่สมุนไพร (ก้อน)</li>
+        <li>ยาดมสมุนไพร (หลอด)</li>
+    </ul>
+</div>
+
+<div class="category">
+    <h2>5. ของกินสมุนไพร</h2>
+    <ul>
+        <li>ไอติมสมุนไพร (ถ้วย)</li>
+        <li>กล้วยอบน้ำผึ้งสมุนไพร (ถุง)</li>
+        <li>เฉาก๊วยสมุนไพร (ถุง)</li>
+        <li>ขิงเชื่อม (ถุง)</li>
+    </ul>
+</div>
+
+<hr>
+
+<h2>หน้าประวัติ (แปลงหน่วย)</h2>
+
+<label>จำนวน:</label>
+<input type="number" id="amount">
+
+<label>หน่วย:</label>
+<select id="unit">
+    <option value="gram">กรัม</option>
+    <option value="kg">กิโลกรัม</option>
+    <option value="crate">ลัง</option>
+    <option value="bottle">ขวด</option>
+</select>
+
+<button onclick="convertUnit()">แปลงหน่วย</button>
+
+<p id="result"></p>
+
+<script>
+function convertUnit() {
+    let amount = parseFloat(document.getElementById("amount").value);
+    let unit = document.getElementById("unit").value;
+    let resultText = "";
+
+    if (unit === "gram") {
+        let kg = amount / 1000;
+        resultText = amount + " กรัม = " + kg + " กิโลกรัม";
+    } 
+    else if (unit === "crate") {
+        let bottles = amount * 24;
+        resultText = amount + " ลัง = " + bottles + " ขวด";
+    } 
+    else {
+        resultText = "ไม่ต้องแปลงหน่วย";
+    }
+
+    document.getElementById("result").innerText = resultText;
+}
+</script>
+
+</body>
+</html>
